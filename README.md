@@ -1,4 +1,4 @@
-###Sandbox for experimenting with machine learning methods.###
+### Sandbox for experimenting with machine learning methods.
 
 * classification_in_pytorch: basic multilayer perceptron for classification with the Pima Indians Diabetes Database
 
