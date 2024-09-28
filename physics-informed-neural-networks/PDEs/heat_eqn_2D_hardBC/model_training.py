@@ -60,29 +60,14 @@ for epoch in range(n_epochs):
     u_ic = model(x_ic, y_ic, t_ic)
     ic_residual = u_ic - initial_condition(x_ic, y_ic)
     
-    # boundary condition residual
-    x_bc = torch.cat([torch.rand(200, 1),
-                      torch.zeros(200, 1),
-                      torch.ones(200, 1),
-                      torch.rand(200, 1)])
-    y_bc = torch.cat([torch.zeros(200, 1),
-                      torch.rand(200, 1),
-                      torch.rand(200, 1),
-                      torch.ones(200, 1)])
-    t_bc = torch.rand(800, 1)
-    u_bc = model(x_bc, y_bc, t_bc)
-    bc_residual = u_bc
-    
-    # Compute the total loss
-    # It's actually much faster to compute loss all at one like this, than to 
-    # use loss += ... to add in all the terms separately. Not sure why.
-    loss = torch.mean(pde_residual**2) + torch.mean(ic_residual**2) + torch.mean(bc_residual**2)
+    # Total loss
+    loss = torch.mean(pde_residual**2) + torch.mean(ic_residual**2)
     
     loss.backward()
     optimizer.step()
     
     if (epoch + 1) % 100 == 0:
-        print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Time/epoc: {(time()-time0)/epoch:.4f}s')
+        print(f'Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.6f}, Time/epoc: {(time()-time0)/epoch:.4f}s')
 
 # Evaluation
 model.eval()
