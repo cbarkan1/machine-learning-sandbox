@@ -52,7 +52,7 @@ def my_transformer(X, mask, head, W_KQV, W_out, W_ff1, W_ff2, eps):
 
 
 B = 50  # Number of batches
-T = 100  # Number of tokens in input (the transformer can, in principle accept token sequences of any length)
+T = 100  # Number of tokens in input (the transformer can accept token sequences of any length)
 d = 64  # Model dimension. Querry and Key dimensions are d/heads.
 heads = 4
 

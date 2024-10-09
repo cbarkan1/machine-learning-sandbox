@@ -32,7 +32,7 @@ def my_attn(X, mask, heads, W_KQV, W_out):
 
 
 B = 50  # Number of batches
-T = 100  # Number of tokens in input (the transformer can, in principle accept token sequences of any length)
+T = 100  # Number of tokens in input (the transformer can accept token sequences of any length)
 d = 64  # Model dimension. Querry and Key dimensions are d/heads.
 heads = 4
 
