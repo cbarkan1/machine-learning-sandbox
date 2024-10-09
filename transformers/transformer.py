@@ -52,8 +52,8 @@ def my_transformer(X, mask, head, W_KQV, W_out, W_ff1, W_ff2, eps):
 
 
 B = 50  # Number of batches
-T = 100  # Model dimension?
-d = 64  # Querry and Key dimension
+T = 100  # Number of tokens in input (the transformer can, in principle accept token sequences of any length)
+d = 64  # Model dimension. Querry and Key dimensions are d/heads.
 heads = 4
 
 
@@ -73,6 +73,7 @@ X = torch.randn(B, T, d)
 torch_Y = torch_transformer(X, mask)
 
 # Weights used by PyTorch:
+# Note: the shapes of all these tensors are independent of T
 W_KQV = torch_transformer.self_attn.in_proj_weight.detach().numpy().T
 W_out = torch_transformer.self_attn.out_proj.weight.detach().numpy().T
 W_ff1 = torch_transformer.linear1.weight.detach().numpy().T
